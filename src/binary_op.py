@@ -16,12 +16,15 @@ def main() -> int:
     group.add_argument("--add", action="store_true", help="Add numbers line-by-line")
     group.add_argument("--mul", action="store_true", help="Multiply numbers line-by-line")
     group.add_argument("--cat", action="store_true", help="Concatenate files")
-    parser.add_argument("--chunk", required=True, type=int, help="Chunk size")
+    parser.add_argument("--chunk", required=False, default=0, type=int, help="Chunk size")
     parser.add_argument("file_a", help="First input file")
     parser.add_argument("file_b", help="Second input file")
     parser.add_argument("file_out", help="Output file")
     args = parser.parse_args()
 
+    if args.chunk <= 0:
+        args.chunk = args.n
+    
     if args.cat:
         with open(args.file_out, "wb", buffering=0) as out_handle:
             with open(args.file_a, "rb", buffering=0) as in_handle:
