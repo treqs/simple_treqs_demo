@@ -17,7 +17,7 @@ def main() -> int:
         parser.error("n must be non-negative")
 
     if args.chunk <= 0:
-        chunk = n
+        args.chunk = args.n
         
     random.seed(args.seed)
 
